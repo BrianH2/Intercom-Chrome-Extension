@@ -1,7 +1,12 @@
 # Intercom-Chrome-Extension
 A Google Chrome Extension for Intercom. Checks Intercom for emails found on the page and returns information and a link to the user.
 
-## Installation
+### Table of Contents
+* [Installation](#installation)
+* [Usage](#usage)
+* [Disclaimer](#disclaimer)
+
+[## Installation](#installation)
 ### Option 1: From the Chrome Store
 COMING SOON: Go the the Chrome store here ADD LINK and add to Chrome
 
@@ -17,6 +22,15 @@ TO DO: describe permissions needed
 7. Select the folder from step 2 and click "Select"
 8. There you go - it is now installed!
 
+## Usage
+1. Click on the extension button in the menu bar
+2. Open the options page
+3. Get your API key and App ID from Intercom ([https://doc.intercom.io/api/#authorization](https://doc.intercom.io/api/#authorization))
+-- Note it is advised to create and use a Read Only key
+4. Paste them into the options page from step 2
+5. Choose the information you want returned on screen
+6. Hit save and close the options
+7. Now, whenever you want to run it on a page, simply click the extension button in the menu bar!
 
 ## Disclaimer
-This is not associated with and has not been endorsed by Intercom
+This is not associated with and has not been endorsed by [Intercom](https://www.intercom.io)
