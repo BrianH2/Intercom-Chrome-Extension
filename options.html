@@ -1,32 +1,31 @@
 <!DOCTYPE html>
 <head>
-<script src='/scripts/jq.js'></script>
-<script src='scripts/saveOptions.js'></script>
-<link rel="stylesheet" type="text/css" href="css/style.css">
+  <title>Intercom Chrome Extension - Options</title>
+  <script src='/scripts/jq.js'></script>
+  <script src='scripts/saveOptions.js'></script>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-
-<div class="container">
-<h1>Intercom Chrome Extension</h1>
-
-<h3>Options:</h3>
-<p class="strong">Set your Intercom API Key and AppID</p>
-<p>This will save them to local storage on this browser (so they never leave your computer). You can generate your API key and find your AppID here: <a href="https://doc.intercom.io/api/#authorization">https://doc.intercom.io/api/#authorization</a></p>
-<input type="text" placeholder="Intercom API Key" id="password"></input>
-<input type="text" placeholder="Intercom AppId" id="username"></input>
-<p class="strong">What info do you want to appear on screen?</p>
-<label><input type="radio" name="dataToReturn" value="return_Name"> Full Name</label><br>
-<label><input type="radio" name="dataToReturn" value="return_Location"> Location Info</label><br>
-<label><input type="radio" name="dataToReturn" value="return_DaysSignup"> Days since sign up</label><br>
-<label><input type="radio" name="dataToReturn" value="return_WebSessions"> Number of web sessions</label><br>
-
-<p style="display: none;" id="success">Options saved!</p>
-
-<a class="button" id="save" href="#">Save options</a>
-<a class="button grey" id="close" href="#">Close this window</a>
-
-<script src='scripts/footer.js'></script>
-</div>
-
+  <div class="container">
+    <h1>Intercom Chrome Extension</h1>
+    
+    <h3>Options:</h3>
+    <p class="strong">Set your Intercom API Key and AppID</p>
+    <p>This will save them to local storage on this browser (so they never leave your computer). You can generate your API key and find your AppID here: <a href="https://doc.intercom.io/api/#authorization">https://doc.intercom.io/api/#authorization</a></p>
+    <input type="text" placeholder="Intercom API Key" id="password"></input>
+    <input type="text" placeholder="Intercom AppId" id="username"></input>
+    <p class="strong">What info do you want to appear on screen?</p>
+    <label><input type="radio" name="dataToReturn" value="return_Name"> Full Name</label><br>
+    <label><input type="radio" name="dataToReturn" value="return_Location"> Location Info</label><br>
+    <label><input type="radio" name="dataToReturn" value="return_DaysSignup"> Days since sign up</label><br>
+    <label><input type="radio" name="dataToReturn" value="return_WebSessions"> Number of web sessions</label><br>
+    
+    <p style="display: none;" id="success">Options saved!</p>
+    
+    <a class="button" id="save" href="#">Save options</a>
+    <a class="button grey" id="close" href="#">Close this window</a>
+    
+    <script src='scripts/footer.js'></script>
+  </div>
 </body>
 </html>
