@@ -6,7 +6,7 @@ A Google Chrome Extension for Intercom. Checks Intercom for emails found on the 
 * [Usage](#usage)
 * [Disclaimer](#disclaimer)
 
-[## Installation](#installation)
+## Installation
 ### Option 1: From the Chrome Store
 COMING SOON: Go the the Chrome store here ADD LINK and add to Chrome
 
@@ -26,10 +26,11 @@ TO DO: describe permissions needed
 1. Click on the extension button in the menu bar
 2. Open the options page
 3. Get your API key and App ID from Intercom ([https://doc.intercom.io/api/#authorization](https://doc.intercom.io/api/#authorization))
--- Note it is advised to create and use a Read Only key
+  * Note it is advised to create and use a Read Only key
 4. Paste them into the options page from step 2
 5. Choose the information you want returned on screen
 6. Hit save and close the options
+  * Note the API key and App ID are saved locally using [https://developer.chrome.com/extensions/storage#property-local](Chrome Local Storage)
 7. Now, whenever you want to run it on a page, simply click the extension button in the menu bar!
 
 ## Disclaimer
