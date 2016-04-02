@@ -1,0 +1,16 @@
+body {padding: 40px 20px 20px 20px; font-size: 13px; font-family: 'Helvetica'; background:#fff;}
+.container {margin: 30px auto; width: 600px;}
+
+input[type="text"] {display: block; padding-top:10px; background: #fff; width: 100%; }
+
+.button {padding: 10px 30px; text-decoration: none; background-color: #4A8EE2; color: #fff; border: none; border-radius: 4px; display: block; margin-top: 15px; text-align: center;}
+.grey {background-color: #BBBBBB;}
+.optionsL,.optionsL:hover,.optionsL:visited {font-weight: bold; text-decoration: none; color: #4A8EE2;}
+
+#error {color: #a94442; background-color: #f2dede; border-color: #ebccd1;}
+#success {color: #3c763d; background-color: #dff0d8; border-color: #d6e9c6;}
+#error, #success {text-align: left; border-radius: 0px; padding: 10px 10px;}
+.strong {font-weight: bold;}
+
+.footer {text-align: center;font-size: smaller;}
+.footer a {text-decoration: none; outline:none; color: inherit;}
