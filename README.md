@@ -18,3 +18,5 @@ TO DO: describe permissions needed
 8. There you go - it is now installed!
 
 
+## Disclaimer
+This is not associated with and has not been endorsed by Intercom
