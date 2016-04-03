@@ -1,1 +1,1 @@
-document.write("<br><p tabindex='-1' class='footer'>This extension is not associated or endorsed by <a href='http://intercom.io'>Intercom</a></p>");
+document.write("<br><p class='footer'>Feedback? <a class='feedback' tabindex='-1' target='_blank' href='https://twitter.com/briantvh'>Tweet @BrianTVH</a></p><p class='footer'>This extension is not associated or endorsed by <a tabindex='-1' target='_blank' href='http://intercom.io'>Intercom</a></p>");
