@@ -9,6 +9,7 @@ function save_options() {
   var password = document.getElementById("password").value;
   var username = document.getElementById("username").value;
   var dataToReturn = $('input[name="dataToReturn"]:checked').val();
+  var dataPresentation = $('input[name="dataPresentation"]:checked').val();
 
   if (password.length < 4 || username.length < 4) {
     document.getElementById('status').textContent = "PLEASE ENTER REAL API KEYS";
@@ -17,7 +18,8 @@ function save_options() {
   chrome.storage.local.set({
     password: password,
     username: username,
-    dataToReturn: dataToReturn
+    dataToReturn: dataToReturn,
+    dataPresentation: dataPresentation
   }, function() {
     // Update status to let user know options were saved.
     document.getElementById('success').style.display="block";
@@ -27,7 +29,6 @@ function save_options() {
   });
 }
 
-
 // Restores select box and checkbox state using the preferences
 // stored in chrome.storage.
 function restore_options() {
@@ -35,11 +36,13 @@ function restore_options() {
   chrome.storage.local.get({
     password: "",
     username: "",
-    dataToReturn: "return_Name"
+    dataToReturn: "return_Name",
+    dataPresentation: "show_Visible"
   }, function(items) {
     document.getElementById('password').value = items.password;
     document.getElementById('username').value = items.username;
     $('input[value="'+items.dataToReturn+'"]').attr("checked","true");
+    $('input[value="'+items.dataPresentation+'"]').attr("checked","true");
   });
 }
 
