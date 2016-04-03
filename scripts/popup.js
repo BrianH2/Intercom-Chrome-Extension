@@ -36,7 +36,7 @@ function injectScript(){
 		document.getElementById("success").innerHTML = "Running on page now!";
 		document.getElementById("success").style.display = "block";
 	} else {
-		document.getElementById("error").innerHTML = "You must save your API keys in the <a href='options.html'>options</a> before this will work";
+		document.getElementById("error").innerHTML = "You must save your API keys in the <a target='_blank' href='options.html'>options</a> before this will work";
 		document.getElementById("error").style.display = "block";
 	}
 }
