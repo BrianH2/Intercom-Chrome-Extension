@@ -2,11 +2,21 @@ var password = "";
 var username = "";
 var dataToReturn = "";
 var dataPresentation = "";
+var extraClassToCheck = "";
 
-chrome.storage.local.get('password', function (result) {password = result.password;});
-chrome.storage.local.get('username', function (result) {username = result.username;});
-chrome.storage.local.get('dataToReturn', function (result) {dataToReturn = result.dataToReturn;});
-chrome.storage.local.get('dataPresentation', function (result) {dataPresentation = result.dataPresentation;});
+chrome.storage.local.get({
+    password: "",
+    username: "",
+    dataToReturn: "return_Name",
+    dataPresentation: "show_Visible",
+    extraClassToCheck: ""
+  }, function(items) {
+    password = items.password;
+    username = items.username;
+    dataToReturn = items.dataToReturn;
+    dataPresentation = items.dataPresentation;
+    extraClassToCheck = items.extraClassToCheck;
+  });
 
 window.onload = function() {
 	// document.getElementById('runScript').addEventListener('click', runButtonF);
@@ -16,7 +26,7 @@ window.onload = function() {
 };
 
 function injectScript(){
-	if (password.length > 3 && username.length > 3 && dataToReturn.length > 3  && dataPresentation.length > 3) {
+	if (password.length > 3 && username.length > 3) {
 		chrome.windows.getCurrent(function (currentWindow) {
 			chrome.tabs.query({active: true, windowId: currentWindow.id}, function(activeTabs) {
 				chrome.tabs.executeScript(activeTabs[0].id, {file: 'scripts/jq.js', allFrames: true});
