@@ -10,18 +10,23 @@ function save_options() {
   var username = document.getElementById("username").value;
   var dataToReturn = $('input[name="dataToReturn"]:checked').val();
   var dataPresentation = $('input[name="dataPresentation"]:checked').val();
+  var extraClassToCheck = document.getElementById('extraClassToCheck').value;
 
-  if (password.length < 4 || username.length < 4) {
-    document.getElementById('status').textContent = "PLEASE ENTER REAL API KEYS";
-  }
+  // if (password.length < 4 || username.length < 4) {
+  //   document.getElementById('error').textContent = "PLEASE ENTER REAL API KEYS";
+  //   document.getElementById('error').style.display="block";
+  //   setTimeout(function() {
+  //     document.getElementById('error').style.display="none";
+  //   }, 2000);
+  // }
 
   chrome.storage.local.set({
     password: password,
     username: username,
     dataToReturn: dataToReturn,
-    dataPresentation: dataPresentation
+    dataPresentation: dataPresentation,
+    extraClassToCheck: extraClassToCheck
   }, function() {
-    // Update status to let user know options were saved.
     document.getElementById('success').style.display="block";
     setTimeout(function() {
       document.getElementById('success').style.display="none";
@@ -29,20 +34,19 @@ function save_options() {
   });
 }
 
-// Restores select box and checkbox state using the preferences
-// stored in chrome.storage.
 function restore_options() {
-  // Use default value color = 'red' and likesColor = true.
   chrome.storage.local.get({
     password: "",
     username: "",
     dataToReturn: "return_Name",
-    dataPresentation: "show_Visible"
+    dataPresentation: "show_Visible",
+    extraClassToCheck: ""
   }, function(items) {
     document.getElementById('password').value = items.password;
     document.getElementById('username').value = items.username;
     $('input[value="'+items.dataToReturn+'"]').attr("checked","true");
     $('input[value="'+items.dataPresentation+'"]').attr("checked","true");
+    document.getElementById('extraClassToCheck').value = items.extraClassToCheck;
   });
 }
 
