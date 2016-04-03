@@ -3,17 +3,15 @@
   "description": "Check any emails (mailto links) on the current page against Intercom. If found, it will add a link and information on the user.",
   "version": "0.2",
   "minimum_chrome_version": "16.0.884",
-  "permissions": ["<all_urls>", "tabs", "storage"],
-  "background": {
-    "scripts": []
-    },
+  "permissions": ["https://api.intercom.io/", "activeTab", "storage"],
+  "background": {},
   "options_page": "options.html",
   "browser_action": {
   	"default_popup": "popup.html",
   	"default_icon": "images/logo.png"},
-  "icons": { "16": "images/logo.png",
-           "48": "images/logo.png",
-          "128": "images/logo.png" },
+  "icons": { "16": "images/logo16.png",
+           "48": "images/logo48.png",
+          "128": "images/logo128.png" },
   "web_accessible_resources": ["images/*.png"],
   "manifest_version": 2
 }
