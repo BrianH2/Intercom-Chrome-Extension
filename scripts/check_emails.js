@@ -1,7 +1,23 @@
+function concat_collection(obj1, obj2) {
+    var i;
+    var arr  = new Array();
+    var len1 = obj1.length;
+    var len2 = obj2.length;
+    for (i=0; i<len1; i++) {
+        arr.push(obj1[i]);
+    }
+    for (i=0; i<len2; i++) {
+        arr.push(obj2[i]);
+    }
+    return arr;
+}
+
 var password = "";
 var username = "";
 var dataToReturn = "";
 var dataPresentation = "";
+var extraClassToCheck = "";
+var allEmailsOnPage;
 var IntChrClassName = "IntercomChrExtBH";
 var timeNow = Math.floor(new Date().getTime() / 1000);
 
@@ -9,8 +25,7 @@ chrome.storage.local.get('password', function (result) {password = result.passwo
 chrome.storage.local.get('username', function (result) {username = result.username;});
 chrome.storage.local.get('dataToReturn', function (result) {dataToReturn = result.dataToReturn;});
 chrome.storage.local.get('dataPresentation', function (result) {dataPresentation = result.dataPresentation;});
-
-var allEmailsOnPage = document.querySelectorAll('a[href^="mailto:"]');
+chrome.storage.local.get('extraClassToCheck', function (result) {extraClassToCheck = result.extraClassToCheck;});
 
 // remove all existing elements from extension on page
 var existingExtensionElements = document.querySelectorAll("."+IntChrClassName);
@@ -19,17 +34,26 @@ for (var i = existingExtensionElements.length - 1; i >= 0; i--) {
 	existingExtensionElements[i].parentNode.removeChild(existingExtensionElements[i]);
 }
 
-// need delay to load jQuery if not there
 setTimeout(function(){
+	allEmailsOnPage = document.querySelectorAll('a[href^="mailto:"]');
+	if (extraClassToCheck.length > 1) {
+		var allOtherEmailsOnPage = document.querySelectorAll('.'+extraClassToCheck);
+		allEmailsOnPage = concat_collection(allEmailsOnPage,allOtherEmailsOnPage);
+	}
 	addIntercomData();
 }, 100);
 
 function addIntercomData() { 
 	jQuery.each(allEmailsOnPage, function (i, item) {
 		var infoSpan = document.createElement('span');
-		var email = item.href;
-		email = email.match(/mailto:([^\?]*)/);
-		email = email[1]?email[1]:false;
+		if (item.hasAttribute("href")) {
+			var email = item.href;
+			email = email.match(/mailto:([^\?]*)/);
+			email = email[1]?email[1]:false;
+		} else {
+			var emailRegex = /(?:[a-z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+\/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/gm
+			email = (item.innerHTML).match(emailRegex)[0];
+		}
 
 		item.style.color='blue';
 		item.style.background='yellow';
