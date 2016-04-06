@@ -36,14 +36,35 @@ for (var i = existingExtensionElements.length - 1; i >= 0; i--) {
 
 setTimeout(function(){
 	allEmailsOnPage = document.querySelectorAll('a[href^="mailto:"]');
+	salesForceEmailsOnPage = document.querySelectorAll('.uiOutputEmail');
+	allEmailsOnPage = concat_collection(allEmailsOnPage, salesForceEmailsOnPage);
 	if (extraClassToCheck.length > 1) {
 		var allOtherEmailsOnPage = document.querySelectorAll('.'+extraClassToCheck);
 		allEmailsOnPage = concat_collection(allEmailsOnPage,allOtherEmailsOnPage);
 	}
-	addIntercomData();
+	// console.log(allEmailsOnPage);
+	console.log(allEmailsOnPage.length);
+	if (allEmailsOnPage.length == 0 ) {
+		chrome.runtime.sendMessage({
+	    	completedScan: "true",
+	    	numberEmailsChecked: allEmailsOnPage.length,
+	    	numberEmailsFound: 0
+    	},function(response) {});
+	} else {
+		addIntercomData();
+	}
 }, 100);
 
+var numberEmailsFound = 0;
+var currentEmailChecking = 0;
 function addIntercomData() { 
+	var searchIntercomUrl = "https://app.intercom.io/apps/"+username+"/users?search=";
+	var currentDomain = document.location.hostname;
+	chrome.runtime.sendMessage({
+      currentDomain: currentDomain
+    },
+    function(response) {});
+
 	jQuery.each(allEmailsOnPage, function (i, item) {
 		var infoSpan = document.createElement('span');
 		if (item.hasAttribute("href")) {
@@ -65,6 +86,7 @@ function addIntercomData() {
 	        	request.setRequestHeader("Authorization", "Basic " + btoa(username + ":" + password));
 	        },
 	        error:function (xhr, ajaxOptions, thrownError){
+	        	currentEmailChecking = currentEmailChecking + 1;
 			    if(xhr.status==404) {
 			        iconImage = "<img style='width:20px; -webkit-filter: grayscale(100%);' src='"+chrome.extension.getURL('images/logo.png')+"' alt='Intercom Chrome Extension'>";
 			        if (dataPresentation == "show_Visible") {
@@ -76,10 +98,25 @@ function addIntercomData() {
 					infoSpan.setAttribute('class', IntChrClassName);
 					allEmailsOnPage[i].parentNode.insertBefore(infoSpan, allEmailsOnPage[i].nextSibling);
 			    }
+
+			    if (currentEmailChecking == allEmailsOnPage.length) {
+					chrome.runtime.sendMessage({
+				    	completedScan: "true",
+				    	numberEmailsChecked: allEmailsOnPage.length,
+				    	numberEmailsFound: numberEmailsFound
+			    	},function(response) {});
+				} else {
+					chrome.runtime.sendMessage({
+				    	completedScan: "scanning page"
+			    	},function(response) {});
+				}
 			}
 	        // cache: false
 	    }).done(function (result) {
 	        // console.log(result);
+	        numberEmailsFound = numberEmailsFound + 1;
+	        currentEmailChecking = currentEmailChecking + 1;
+	        // console.log(numberEmailsFound);
 	        var emailIntercom = result["email"];
 			var webSessions = result["session_count"];
 			var location = result["location_data"]["city_name"] + ", " + result["location_data"]["region_name"] + ", " + result["location_data"]["country_name"]
@@ -90,19 +127,19 @@ function addIntercomData() {
 
 			iconImage = "<img style='width:20px;' src='"+chrome.extension.getURL('images/logo.png')+"' alt='Intercom Chrome Extension'>";
 			if (dataPresentation == "show_Visible") {
-				if (webSessions > 3) {
-					webSessionsSTYLE = "color:green;";
-				} else {
-					webSessionsSTYLE = "color:grey;";
-				}
+				// if (webSessions > 3) {
+				// 	webSessionsSTYLE = "color:green;";
+				// } else {
+				// 	webSessionsSTYLE = "color:grey;";
+				// }
 				if (dataToReturn == "return_WebSessions") {
-					infoSpan.innerHTML = " <a style='font-weight:bold' href='https://app.intercom.io/apps/eqe7kbcu/users?search="+email+"' target='_blank'> "+iconImage+" <span style='"+webSessionsSTYLE+"'>"+webSessions+" web sessions</span></a>";
+					infoSpan.innerHTML = " <a style='font-weight:bold' href='"+searchIntercomUrl+email+"' target='_blank'> "+iconImage+" <span style='"+webSessionsSTYLE+"'>"+webSessions+" web sessions</span></a>";
 				} else if(dataToReturn == "return_DaysSignup") {
-					infoSpan.innerHTML = " <a style='font-weight:bold' href='https://app.intercom.io/apps/eqe7kbcu/users?search="+email+"' target='_blank'> "+iconImage+" "+daysSinceSignup+" days</a>";
+					infoSpan.innerHTML = " <a style='font-weight:bold' href='"+searchIntercomUrl+email+"' target='_blank'> "+iconImage+" "+daysSinceSignup+" days</a>";
 				} else if(dataToReturn == "return_Location") {
-					infoSpan.innerHTML = " <a style='font-weight:bold' href='https://app.intercom.io/apps/eqe7kbcu/users?search="+email+"' target='_blank'> "+iconImage+" "+location+"</a>";
+					infoSpan.innerHTML = " <a style='font-weight:bold' href='"+searchIntercomUrl+email+"' target='_blank'> "+iconImage+" "+location+"</a>";
 				} else if(dataToReturn == "return_Name") {
-					infoSpan.innerHTML = " <a style='font-weight:bold' href='https://app.intercom.io/apps/eqe7kbcu/users?search="+email+"' target='_blank'> "+iconImage+" "+name+"</a>";
+					infoSpan.innerHTML = " <a style='font-weight:bold' href='"+searchIntercomUrl+email+"' target='_blank'> "+iconImage+" "+name+"</a>";
 				}
 				infoSpan.setAttribute('title', emailIntercom + " | " + name); 
 			} else {
@@ -119,22 +156,33 @@ function addIntercomData() {
 				head.appendChild(style);
 
 				if (dataToReturn == "return_WebSessions") {
-					infoSpan.innerHTML = " <a class='tooltipIntChrExt' data-tip='"+webSessions+" web sessions' href='https://app.intercom.io/apps/eqe7kbcu/users?search="+email+"' target='_blank'>"+iconImage+"</a>";
+					infoSpan.innerHTML = " <a class='tooltipIntChrExt' data-tip='"+webSessions+" web sessions' href='"+searchIntercomUrl+email+"' target='_blank'>"+iconImage+"</a>";
 					infoSpan.setAttribute('title', webSessions+" web sessions");
 				} else if(dataToReturn == "return_DaysSignup") {
-					infoSpan.innerHTML = " <a class='tooltipIntChrExt' data-tip='"+daysSinceSignup+" days since sign up' href='https://app.intercom.io/apps/eqe7kbcu/users?search="+email+"' target='_blank'>"+iconImage+"</a>";
+					infoSpan.innerHTML = " <a class='tooltipIntChrExt' data-tip='"+daysSinceSignup+" days since sign up' href='"+searchIntercomUrl+email+"' target='_blank'>"+iconImage+"</a>";
 					infoSpan.setAttribute('title', daysSinceSignup+" days since sign up");
 				} else if(dataToReturn == "return_Location") {
-					infoSpan.innerHTML = " <a class='tooltipIntChrExt' data-tip='"+location+"' href='https://app.intercom.io/apps/eqe7kbcu/users?search="+email+"' target='_blank'>"+iconImage+"</a>";
+					infoSpan.innerHTML = " <a class='tooltipIntChrExt' data-tip='"+location+"' href='"+searchIntercomUrl+email+"' target='_blank'>"+iconImage+"</a>";
 					infoSpan.setAttribute('title', location);
 				} else if(dataToReturn == "return_Name") {
-					infoSpan.innerHTML = " <a class='tooltipIntChrExt' data-tip='"+name+"' href='https://app.intercom.io/apps/eqe7kbcu/users?search="+email+"' target='_blank'>"+iconImage+"</a>";
+					infoSpan.innerHTML = " <a class='tooltipIntChrExt' data-tip='"+name+"' href='"+searchIntercomUrl+email+"' target='_blank'>"+iconImage+"</a>";
 					infoSpan.setAttribute('title', name);
 				}
 			}
 
 			infoSpan.setAttribute('class', IntChrClassName);
 			allEmailsOnPage[i].parentNode.insertBefore(infoSpan, allEmailsOnPage[i].nextSibling);
+			if (currentEmailChecking == allEmailsOnPage.length) {
+				chrome.runtime.sendMessage({
+			    	completedScan: "true",
+			    	numberEmailsChecked: allEmailsOnPage.length,
+			    	numberEmailsFound: numberEmailsFound
+		    	},function(response) {});
+			} else {
+					chrome.runtime.sendMessage({
+				    	completedScan: "scanning page"
+			    	},function(response) {});
+				}
 	    });
 	});
 }
