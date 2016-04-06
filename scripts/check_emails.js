@@ -15,6 +15,7 @@ function concat_collection(obj1, obj2) {
 var password = "";
 var username = "";
 var dataToReturn = "";
+var return_Custom = "";
 var dataPresentation = "";
 var extraClassToCheck = "";
 var allEmailsOnPage;
@@ -24,6 +25,7 @@ var timeNow = Math.floor(new Date().getTime() / 1000);
 chrome.storage.local.get('password', function (result) {password = result.password;});
 chrome.storage.local.get('username', function (result) {username = result.username;});
 chrome.storage.local.get('dataToReturn', function (result) {dataToReturn = result.dataToReturn;});
+chrome.storage.local.get('return_Custom', function (result) {return_Custom = result.return_Custom;});
 chrome.storage.local.get('dataPresentation', function (result) {dataPresentation = result.dataPresentation;});
 chrome.storage.local.get('extraClassToCheck', function (result) {extraClassToCheck = result.extraClassToCheck;});
 
@@ -43,7 +45,6 @@ setTimeout(function(){
 		allEmailsOnPage = concat_collection(allEmailsOnPage,allOtherEmailsOnPage);
 	}
 	// console.log(allEmailsOnPage);
-	console.log(allEmailsOnPage.length);
 	if (allEmailsOnPage.length == 0 ) {
 		chrome.runtime.sendMessage({
 	    	completedScan: "true",
@@ -141,6 +142,10 @@ function addIntercomData() {
 					infoSpan.innerHTML = " <a style='font-weight:bold' href='"+searchIntercomUrl+email+"' target='_blank'> "+iconImage+" "+location+"</a>";
 				} else if(dataToReturn == "return_Name") {
 					infoSpan.innerHTML = " <a style='font-weight:bold' href='"+searchIntercomUrl+email+"' target='_blank'> "+iconImage+" "+name+"</a>";
+				} else if(dataToReturn == "return_Custom") {
+					var custom_attribute = result["custom_attributes"][return_Custom];
+					if (custom_attribute == null) {custom_attribute = "unknown";}
+					infoSpan.innerHTML = " <a style='font-weight:bold' href='"+searchIntercomUrl+email+"' target='_blank'> "+iconImage+" "+custom_attribute+"</a>";
 				}
 				infoSpan.setAttribute('title', emailIntercom + " | " + name); 
 			} else {
@@ -168,6 +173,11 @@ function addIntercomData() {
 				} else if(dataToReturn == "return_Name") {
 					infoSpan.innerHTML = " <a class='tooltipIntChrExt' data-tip='"+name+"' href='"+searchIntercomUrl+email+"' target='_blank'>"+iconImage+"</a>";
 					infoSpan.setAttribute('title', name);
+				} else if(dataToReturn == "return_Custom") {
+					var custom_attribute = result["custom_attributes"][return_Custom];
+					if (custom_attribute == null) {custom_attribute = "unknown";}
+					infoSpan.innerHTML = " <a class='tooltipIntChrExt' data-tip='"+custom_attribute+"' href='"+searchIntercomUrl+email+"' target='_blank'>"+iconImage+"</a>";
+					infoSpan.setAttribute('title', custom_attribute);
 				}
 			}
 
