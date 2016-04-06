@@ -57,6 +57,7 @@ chrome.runtime.onMessage.addListener(
 				document.getElementById("error").style.display = "none";
 				document.getElementById("warning").style.display = "none";
 				document.getElementById("success").innerHTML = "Completed scan of page, checked "+request.numberEmailsChecked+" email(s) on the page and found "+request.numberEmailsFound+" results. <a href='"+searchIntercomUrl+currentDomain+"' target='_blank'>You can click here to search Intercom for "+currentDomain+"</a>";
+				document.getElementById("success").style.display = "block";
 			} else if(request.numberEmailsChecked == 0) {
 				document.getElementById("success").style.display = "none";
 				document.getElementById("warning").style.display = "none";
