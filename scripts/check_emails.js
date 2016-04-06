@@ -60,6 +60,7 @@ var currentEmailChecking = 0;
 function addIntercomData() { 
 	var searchIntercomUrl = "https://app.intercom.io/apps/"+username+"/users?search=";
 	var currentDomain = document.location.hostname;
+	currentDomain = currentDomain.replace("www.","");
 	chrome.runtime.sendMessage({
       currentDomain: currentDomain
     },
