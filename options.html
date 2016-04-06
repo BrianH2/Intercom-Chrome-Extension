@@ -13,14 +13,15 @@
 		<p>Input your API key and App ID here. They will save them to local storage on this browser (so they never leave your computer). You can generate your API key and find your App ID here: <a href="https://developers.intercom.io/reference#authorization">https://developers.intercom.io/reference#authorization</a></p>
 		<input type="text" placeholder="Intercom API Key" id="password"></input>
 		<p class="strong">Intercom App ID</p>
-		<input type="text" placeholder="Intercom AppId" id="username"></input>
+		<input type="text" placeholder="Intercom App ID" id="username"></input>
 
 		<br>
 		<p class="strong">What information do you want to appear on screen?</p>
+		<label><input type="radio" name="dataToReturn" value="return_WebSessions"> Number of web sessions</label><br>
 		<label><input type="radio" name="dataToReturn" value="return_Name"> Full Name</label><br>
 		<label><input type="radio" name="dataToReturn" value="return_Location"> Location Info</label><br>
 		<label><input type="radio" name="dataToReturn" value="return_DaysSignup"> Days since sign up</label><br>
-		<label><input type="radio" name="dataToReturn" value="return_WebSessions"> Number of web sessions</label><br>
+		<label><input type="radio" name="dataToReturn" value="return_Custom"> Custom attribute: <input type="text" placeholder="Custom Attribute" id="return_Custom"></input></label><br>
 
 		<br>
 		<p class="strong">Do you want the information visible beside the email or on hover?</p>
