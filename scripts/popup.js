@@ -75,7 +75,7 @@ chrome.runtime.onMessage.addListener(
 		} else if(request.completedScan == "scanning page"){
 			document.getElementById("success").style.display = "none";
 			document.getElementById("error").style.display = "none";
-			document.getElementById("warning").innerHTML = "Scanning page <a href='"+searchIntercomUrl+currentDomain+"' target='_blank'>. Click here to search for all users in Intercom containing "+currentDomain+" while you wait!</a>";
+			document.getElementById("warning").innerHTML = "Scanning page. <a href='"+searchIntercomUrl+currentDomain+"' target='_blank'>Click here to search for all users in Intercom containing "+currentDomain+" while you wait!</a>";
 			document.getElementById("warning").style.display = "block";
 		}
 	});
