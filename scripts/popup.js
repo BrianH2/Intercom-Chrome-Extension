@@ -19,7 +19,6 @@ chrome.storage.local.get({
   });
 
 window.onload = function() {
-	// document.getElementById('runScript').addEventListener('click', runButtonF);
 	setTimeout(function(){
 		injectScript();
 	}, 100);
@@ -28,7 +27,7 @@ window.onload = function() {
 function injectScript(){
 	if (password.length > 3 && username.length > 3) {
 		chrome.windows.getCurrent(function (currentWindow) {
-			chrome.tabs.query({active: true, windowId: currentWindow.id}, function(activeTabs) {
+			chrome.tabs.query({active: true, windowId: currentWindow.id, }, function(activeTabs) {
 				chrome.tabs.executeScript(activeTabs[0].id, {file: 'scripts/jq.js', allFrames: true});
 				chrome.tabs.executeScript(activeTabs[0].id, {file: 'scripts/check_emails.js', allFrames: true});
 			});
@@ -41,7 +40,38 @@ function injectScript(){
 	}
 }
 
-// function runButtonF() {
-// 	injectScript();
-// 	window.close();
-// }
+var currentDomain;
+chrome.runtime.onMessage.addListener(
+	function(request, sender, sendResponse) {
+		if (request.currentDomain != null){
+			currentDomain = request.currentDomain;
+			sendResponse({msg: "received"});
+			var searchIntercomUrl = "https://app.intercom.io/apps/"+username+"/users?search=";
+			document.getElementById("success").innerHTML = "Running on page now! <a href='"+searchIntercomUrl+currentDomain+"' target='_blank'>Or click here to search Intercom for "+currentDomain+"</a>";
+		}
+
+		if (request.completedScan == "true"){
+			sendResponse({msg2: "received"});
+			var searchIntercomUrl = "https://app.intercom.io/apps/"+username+"/users?search=";
+			if (request.numberEmailsFound > 0) {
+				document.getElementById("error").style.display = "none";
+				document.getElementById("warning").style.display = "none";
+				document.getElementById("success").innerHTML = "Completed scan of page, checked "+request.numberEmailsChecked+" email(s) on the page and found "+request.numberEmailsFound+" results. <a href='"+searchIntercomUrl+currentDomain+"' target='_blank'>You can click here to search Intercom for "+currentDomain+"</a>";
+			} else if(request.numberEmailsChecked == 0) {
+				document.getElementById("success").style.display = "none";
+				document.getElementById("warning").style.display = "none";
+				document.getElementById("error").innerHTML = "Completed scan of page, but found no email(s) to check. <a href='"+searchIntercomUrl+currentDomain+"' target='_blank'>But you can click here to search Intercom for "+currentDomain+"</a>";
+				document.getElementById("error").style.display = "block";
+			} else if(request.numberEmailsChecked > 0 && request.numberEmailsFound == 0){
+				document.getElementById("success").style.display = "none";
+				document.getElementById("error").style.display = "none";
+				document.getElementById("warning").innerHTML = "Completed scan of page, found "+request.numberEmailsChecked+" email(s) but did not find them in Intercom. <a href='"+searchIntercomUrl+currentDomain+"' target='_blank'>But you can click here to search Intercom for "+currentDomain+"</a>";
+				document.getElementById("warning").style.display = "block";
+			}
+		} else if(request.completedScan == "scanning page"){
+			document.getElementById("success").style.display = "none";
+			document.getElementById("error").style.display = "none";
+			document.getElementById("warning").innerHTML = "Scanning page <a href='"+searchIntercomUrl+currentDomain+"' target='_blank'>But you can click here to search Intercom for "+currentDomain+"</a>";
+			document.getElementById("warning").style.display = "block";
+		}
+	});
