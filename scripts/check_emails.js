@@ -129,11 +129,11 @@ function addIntercomData() {
 
 			iconImage = "<img style='width:20px;' src='"+chrome.extension.getURL('images/logo.png')+"' alt='Intercom Chrome Extension'>";
 			if (dataPresentation == "show_Visible") {
-				// if (webSessions > 3) {
-				// 	webSessionsSTYLE = "color:green;";
-				// } else {
-				// 	webSessionsSTYLE = "color:grey;";
-				// }
+				if (webSessions > 5) {
+					webSessionsSTYLE = "color:green;";
+				} else {
+					webSessionsSTYLE = "color:grey;";
+				}
 				if (dataToReturn == "return_WebSessions") {
 					infoSpan.innerHTML = " <a style='font-weight:bold' href='"+searchIntercomUrl+email+"' target='_blank'> "+iconImage+" <span style='"+webSessionsSTYLE+"'>"+webSessions+" web sessions</span></a>";
 				} else if(dataToReturn == "return_DaysSignup") {
@@ -191,7 +191,8 @@ function addIntercomData() {
 		    	},function(response) {});
 			} else {
 					chrome.runtime.sendMessage({
-				    	completedScan: "scanning page"
+				    	completedScan: "scanning page",
+				    	currentDomain: currentDomain
 			    	},function(response) {});
 				}
 	    });
