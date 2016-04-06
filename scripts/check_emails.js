@@ -45,11 +45,14 @@ setTimeout(function(){
 		allEmailsOnPage = concat_collection(allEmailsOnPage,allOtherEmailsOnPage);
 	}
 	// console.log(allEmailsOnPage);
+	var currentDomain = document.location.hostname;
+	currentDomain = currentDomain.replace("www.","");
 	if (allEmailsOnPage.length == 0 ) {
 		chrome.runtime.sendMessage({
 	    	completedScan: "true",
 	    	numberEmailsChecked: allEmailsOnPage.length,
-	    	numberEmailsFound: 0
+	    	numberEmailsFound: 0,
+			currentDomain: currentDomain
     	},function(response) {});
 	} else {
 		addIntercomData();
@@ -105,7 +108,8 @@ function addIntercomData() {
 					chrome.runtime.sendMessage({
 				    	completedScan: "true",
 				    	numberEmailsChecked: allEmailsOnPage.length,
-				    	numberEmailsFound: numberEmailsFound
+				    	numberEmailsFound: numberEmailsFound,
+				    	currentDomain: currentDomain
 			    	},function(response) {});
 				} else {
 					chrome.runtime.sendMessage({
@@ -187,7 +191,8 @@ function addIntercomData() {
 				chrome.runtime.sendMessage({
 			    	completedScan: "true",
 			    	numberEmailsChecked: allEmailsOnPage.length,
-			    	numberEmailsFound: numberEmailsFound
+			    	numberEmailsFound: numberEmailsFound,
+				    currentDomain: currentDomain
 		    	},function(response) {});
 			} else {
 					chrome.runtime.sendMessage({
