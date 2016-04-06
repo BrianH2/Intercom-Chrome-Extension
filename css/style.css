@@ -1,7 +1,7 @@
 body {padding: 40px 20px 20px 20px; font-size: 13px; font-family: 'Helvetica'; background:#fff;}
 .container {margin: 30px auto; width: 600px;}
 
-input[type="text"] {display: block; padding: 8px 10px; background: #fff; width: 100%; font-size: 12px; box-sizing: border-box;}
+input[type="text"] {display: block; padding: 8px 10px; color: #153E71; background: #fff; width: 100%; font-size: 12px; box-sizing: border-box;}
 
 h1 {font-size: 24px;}
 
@@ -18,3 +18,5 @@ h1 {font-size: 24px;}
 .footer {text-align: center;font-size: smaller;}
 .footer a {text-decoration: none; outline:none; color: inherit;}
 a.feedback {font-weight: bold; color: #4A8EE2;}
+
+input#return_Custom {display: inline-block; width: 150px; padding: 2px 3px;}
