@@ -11,7 +11,8 @@ h1 {font-size: 24px;}
 
 #error {color: #a94442; background-color: #f2dede; border-color: #ebccd1;}
 #success {color: #3c763d; background-color: #dff0d8; border-color: #d6e9c6;}
-#error, #success {text-align: left; border-radius: 0px; padding: 10px 10px;}
+#warning {color: #8a6d3b; background-color: #fcf8e3; border-color: #faebcc;}
+#warning, #error, #success {text-align: left; border-radius: 0px; padding: 10px 10px;}
 .strong {font-weight: bold;}
 
 .footer {text-align: center;font-size: smaller;}
