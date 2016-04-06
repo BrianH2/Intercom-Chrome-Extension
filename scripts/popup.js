@@ -64,18 +64,18 @@ chrome.runtime.onMessage.addListener(
 			} else if(request.numberEmailsChecked == 0) {
 				document.getElementById("success").style.display = "none";
 				document.getElementById("warning").style.display = "none";
-				document.getElementById("error").innerHTML = "Completed scan of page, but found no email(s) to check. <a href='"+searchIntercomUrl+currentDomain+"' target='_blank'>But you can click here to search Intercom for "+currentDomain+"</a>";
+				document.getElementById("error").innerHTML = "Completed scan of page, but found no email(s) to check. <a href='"+searchIntercomUrl+currentDomain+"' target='_blank'>However you can click here to search Intercom for any users containing "+currentDomain+"</a>";
 				document.getElementById("error").style.display = "block";
 			} else if(request.numberEmailsChecked > 0 && request.numberEmailsFound == 0){
 				document.getElementById("success").style.display = "none";
 				document.getElementById("error").style.display = "none";
-				document.getElementById("warning").innerHTML = "Completed scan of page, found "+request.numberEmailsChecked+" email(s) but did not find them in Intercom. <a href='"+searchIntercomUrl+currentDomain+"' target='_blank'>But you can click here to search Intercom for "+currentDomain+"</a>";
+				document.getElementById("warning").innerHTML = "Completed scan of page, found "+request.numberEmailsChecked+" email(s) but did not find them in Intercom. <a href='"+searchIntercomUrl+currentDomain+"' target='_blank'>However, you can still check Intercom for any users with '"+currentDomain+"'</a>";
 				document.getElementById("warning").style.display = "block";
 			}
 		} else if(request.completedScan == "scanning page"){
 			document.getElementById("success").style.display = "none";
 			document.getElementById("error").style.display = "none";
-			document.getElementById("warning").innerHTML = "Scanning page <a href='"+searchIntercomUrl+currentDomain+"' target='_blank'>But you can click here to search Intercom for "+currentDomain+"</a>";
+			document.getElementById("warning").innerHTML = "Scanning page <a href='"+searchIntercomUrl+currentDomain+"' target='_blank'>. Click here to search for all users in Intercom containing "+currentDomain+" while you wait!</a>";
 			document.getElementById("warning").style.display = "block";
 		}
 	});
