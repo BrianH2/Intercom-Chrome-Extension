@@ -3,19 +3,22 @@ var username = "";
 var dataToReturn = "";
 var dataPresentation = "";
 var extraClassToCheck = "";
+var return_Custom = "";
 
 chrome.storage.local.get({
     password: "",
     username: "",
-    dataToReturn: "return_Name",
+    dataToReturn: "return_WebSessions",
     dataPresentation: "show_Visible",
-    extraClassToCheck: ""
+    extraClassToCheck: "",
+    return_Custom: ""
   }, function(items) {
     password = items.password;
     username = items.username;
     dataToReturn = items.dataToReturn;
     dataPresentation = items.dataPresentation;
     extraClassToCheck = items.extraClassToCheck;
+    return_Custom = items.return_Custom;
   });
 
 window.onload = function() {
