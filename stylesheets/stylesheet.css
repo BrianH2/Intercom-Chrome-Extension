@@ -212,7 +212,7 @@ a {
   .main-content {
     max-width: 64rem;
     padding: 2rem 6rem;
-    /*margin: 0 auto;*/
+    margin: 30px auto;
     font-size: 1.1rem; } }
 
 @media screen and (min-width: 42em) and (max-width: 64em) {
