@@ -93,7 +93,7 @@ function addIntercomData() {
 	        error:function (xhr, ajaxOptions, thrownError){
 	        	currentEmailChecking = currentEmailChecking + 1;
 			    if(xhr.status==404) {
-			        iconImage = "<img style='width:20px; -webkit-filter: grayscale(100%);' src='"+chrome.extension.getURL('images/logo.png')+"' alt='Intercom Chrome Extension'>";
+			        iconImage = "<img style='width:20px; height:20px; vertical-align: middle; -webkit-filter: grayscale(100%);' src='"+chrome.extension.getURL('images/logo.png')+"' alt='Intercom Chrome Extension'>";
 			        if (dataPresentation == "show_Visible") {
 						infoSpan.innerHTML = " " + iconImage + " not found";
 					} else {
@@ -131,12 +131,12 @@ function addIntercomData() {
 			var minsInDay = 24*60*60;
 			var daysSinceSignup = Math.floor( (timeNow - signed_up_at) / minsInDay);
 
-			iconImage = "<img style='width:20px;' src='"+chrome.extension.getURL('images/logo.png')+"' alt='Intercom Chrome Extension'>";
+			iconImage = "<img style='width:20px; height:20px; vertical-align: middle;' src='"+chrome.extension.getURL('images/logo.png')+"' alt='Intercom Chrome Extension'>";
 			if (dataPresentation == "show_Visible") {
-				if (webSessions > 5) {
+				if (webSessions > 10) {
 					webSessionsSTYLE = "color:green;";
 				} else {
-					webSessionsSTYLE = "color:grey;";
+					webSessionsSTYLE = "";
 				}
 				if (dataToReturn == "return_WebSessions") {
 					infoSpan.innerHTML = " <a style='font-weight:bold' href='"+searchIntercomUrl+email+"' target='_blank'> "+iconImage+" <span style='"+webSessionsSTYLE+"'>"+webSessions+" web sessions</span></a>";
