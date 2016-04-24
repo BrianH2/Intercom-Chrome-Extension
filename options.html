@@ -1,21 +1,15 @@
 <!DOCTYPE html>
 <head>
-	<title>Intercom Chrome Extension - Options</title>
+	<title>Options | Intercom Chrome Extension</title>
 	<script src='/scripts/jq.js'></script>
 	<script src='scripts/saveOptions.js'></script>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
-<body>
+<body class="options">
 	<div class="container">
 		<h1>Intercom Chrome Extension Options</h1>
 
-		<p class="strong">Intercom API Key</p>
-		<p>Input your API key and App ID here. They will save them to local storage on this browser (so they never leave your computer). You can generate your API key and find your App ID here: <a href="https://developers.intercom.io/reference#authorization">https://developers.intercom.io/reference#authorization</a></p>
-		<input type="text" placeholder="Intercom API Key" id="password"></input>
-		<p class="strong">Intercom App ID</p>
-		<input type="text" placeholder="Intercom App ID" id="username"></input>
-
-		<br>
+		<!-- <br> -->
 		<p class="strong">What information do you want to appear on screen?</p>
 		<label><input type="radio" name="dataToReturn" value="return_WebSessions"> Number of web sessions</label><br>
 		<label><input type="radio" name="dataToReturn" value="return_Name"> Full Name</label><br>
@@ -27,10 +21,24 @@
 		<p class="strong">Do you want the information visible beside the email or on hover?</p>
 		<label><input type="radio" name="dataPresentation" value="show_Visible"> Visible</label><br>
 		<label><input type="radio" name="dataPresentation" value="show_onHover"> On hover</label><br>
-
 		<br>
-		<p class="strong">Is there an additional class you want to check on the page?</p>
-		<input type="text" placeholder="Enter the class name you want to check, e.g. user-email" id="extraClassToCheck"></input>
+
+		<details><summary>Advanced options</summary>
+			<p class="strong">Is there an additional class you want to check on the page?</p>
+			<p>This is for more advanced users. The extension currently searches for all mailto links on the page. If you have a website which has email addresses outside of a mailto link, but within a specific class name, then enter it here.</p>
+			<input type="text" placeholder="Enter the class name you want to check, e.g. user-email" id="extraClassToCheck"></input>
+			<br>
+
+			<div class="optionsBox">
+				<h3>Intercom API Credentials</h3>
+				<p><a href="/welcome.html">Walk through finding and saving your Intercom API credentials here.</a></p>
+				<p class="strong">Intercom App ID</p>
+				<input style="width: 200px;" type="text" placeholder="Intercom App ID" id="username"></input>
+				<p class="strong">Intercom API Key</p>
+				<input type="text" placeholder="Intercom API Key" id="password"></input>
+			</div>
+		</details>
+		<br>
 
 		<p style="display: none;" id="error"></p>
 		<p style="display: none;" id="success">Options saved!</p>
