@@ -1,11 +1,17 @@
 {
   "name": "Intercom Chrome Extension",
-  "description": "Check any emails (mailto links) on the current page against Intercom. If found, it will add a link and information on the user.",
-  "version": "0.4.5",
-  "minimum_chrome_version": "16.0.884",
+  "description": "Check any emails on the current page against users in your Intercom account. If found, it will add a link and information on the user.",
+  "version": "0.4.7",
+  "minimum_chrome_version": "26",
   "permissions": ["https://api.intercom.io/", "activeTab", "storage"],
-  "background": {},
+  "background": {
+  	"scripts": ["scripts/background.js"],
+  	"persistent": false},
   "options_page": "options.html",
+  "content_scripts": [{
+      "matches": ["<all_urls>"],
+      "js": ["scripts/jq.js", "scripts/check_emails.js"]
+    }],
   "browser_action": {
   	"default_popup": "popup.html",
   	"default_icon": "images/logo.png"},
