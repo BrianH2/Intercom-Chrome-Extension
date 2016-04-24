@@ -13,14 +13,6 @@ function save_options() {
   var extraClassToCheck = document.getElementById('extraClassToCheck').value;
   var return_Custom = document.getElementById('return_Custom').value;
 
-  // if (password.length < 4 || username.length < 4) {
-  //   document.getElementById('error').textContent = "PLEASE ENTER REAL API KEYS";
-  //   document.getElementById('error').style.display="block";
-  //   setTimeout(function() {
-  //     document.getElementById('error').style.display="none";
-  //   }, 2000);
-  // }
-
   chrome.storage.local.set({
     password: password,
     username: username,
@@ -32,7 +24,7 @@ function save_options() {
     document.getElementById('success').style.display="block";
     setTimeout(function() {
       document.getElementById('success').style.display="none";
-    }, 1500);
+    }, 2500);
   });
 }
 
@@ -51,6 +43,11 @@ function restore_options() {
     $('input[value="'+items.dataPresentation+'"]').attr("checked","true");
     document.getElementById('extraClassToCheck').value = items.extraClassToCheck;
     document.getElementById('return_Custom').value = items.return_Custom;
+
+    if (items.password.length < 10 || items.username.length < 5) {
+      document.getElementById('error').innerHTML = "There is a problem with your Intercom API credentials. <a href='/welcome.html'>Click here to find and save them</a>.";
+      document.getElementById('error').style.display="block";
+    }
   });
 }
 
