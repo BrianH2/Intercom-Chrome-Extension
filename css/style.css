@@ -1,7 +1,7 @@
 body {padding: 40px 20px 20px 20px; font-size: 13px; font-family: 'Helvetica'; background:#fff;}
 .container {margin: 30px auto; width: 600px;}
 
-input[type="text"] {display: block; padding: 8px 10px; color: #153E71; background: #fff; width: 100%; font-size: 12px; box-sizing: border-box;}
+input[type="text"] {display: block; padding: 8px 10px; color: #153E71; background: #fff; width: 100%; font-size: 14px; box-sizing: border-box;}
 
 h1 {font-size: 24px;}
 
@@ -20,3 +20,11 @@ h1 {font-size: 24px;}
 a.feedback {font-weight: bold; color: #4A8EE2;}
 
 input#return_Custom {display: inline-block; width: 150px; padding: 2px 3px;}
+
+li {padding-bottom: 15px;}
+details {background: #f5f5f5; padding: 10px;}
+
+body.options {font-size: 15px;}
+body.options > .container {width: 700px;}
+
+.optionsBox {border: #CECECE 1px solid; padding: 10px;}
