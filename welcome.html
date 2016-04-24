@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<head>
+	<title>Welcome! Intercom Chrome Extension</title>
+	<script src='/scripts/jq.js'></script>
+	<script src='scripts/saveOptionsWelcome.js'></script>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body class="options">
+	<div class="container">
+		<h1>Welcome to the Intercom Chrome Extension!</h1>
+		<br>
+		<p class="strong">To get started, you need to save your Intercom API credentials.</p>
+		<p>Your API credentials will be stored on your computer and the developers of this extension or any other parties will not have access to them. You can even check out the code of this application <a href="https://github.com/BrianH2/Intercom-Chrome-Extension">on Github here</a>.</p>
+
+		<details>
+		<summary>See step by step instructions to getting your Intercom API credentials</summary>
+		<p>To get and save your credentials follow these steps:</p>
+		<ol>
+			<li><a href="https://app.intercom.io/admins/sign_in">Sign into Intercom here</a></li>
+			<li>Hover on the person icon at the bottom left of the screen and click on "App Settings"<br><br><img style="width: 250px;" src="images/appsettings.png"><br></li>
+			<li>Click on the "API Keys" tab in the left side menu<br><br><img style="width: 200px;" src="images/apikeys.png"><br></li>
+			<li>Click on "Create Read Only Access API Key"<br><br><img style="width: 600px;" src="images/create.png"><br></li>
+			<li>Click "Accept and Continue" if prompted</li>
+			<li>Your new API is now created and should appear in the table above where you clicked to create</li>
+			<li>Now copy the App ID and API Key into the input fields below and click save!<br><br><img style="width: 600px;" src="images/copy.png"><br></li>
+		</ol>
+		</details>
+
+		<br>
+		<p class="strong">Paste your Intercom App ID here:</p>
+		<input style="width: 200px;" type="text" placeholder="Intercom App ID" id="username"></input>
+		<p class="strong">Paste your Intercom API Key here:</p>
+		<input type="text" placeholder="Intercom API Key" id="password"></input>
+
+		<p style="display: none;" id="error">Please enter your App ID and API Key above.</p>
+		<p style="display: none;" id="success">Thank you, your API credentials are now saved! You can <a href="" id="close">close</a> this window and the extension will run anywhere it finds an email address.<br><br>To change other options, <a href="/options.html">click here.</a></p>
+
+		<p style="cursor: pointer; " class="button" id="save">Save your credentials!</p>
+
+		<br><br>
+		<script src='scripts/footer.js'></script>
+	</div>
+</body>
+</html>
