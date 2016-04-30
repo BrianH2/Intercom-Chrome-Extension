@@ -5,9 +5,9 @@ input[type="text"] {display: block; padding: 8px 10px; color: #153E71; backgroun
 
 h1 {font-size: 24px;}
 
-.button {padding: 10px 30px; text-decoration: none; background-color: #4A8EE2; color: #fff; border: none; border-radius: 4px; display: block; margin-top: 15px; text-align: center;}
+.button {padding: 10px 30px; text-decoration: none; background-color: #1f8ceb; color: #fff; border: none; border-radius: 4px; display: block; margin-top: 15px; text-align: center;}
 .grey {background-color: #BBBBBB;}
-.optionsL,.optionsL:hover,.optionsL:visited {font-weight: bold; text-decoration: none; color: #4A8EE2;}
+.optionsL,.optionsL:hover,.optionsL:visited {font-weight: bold; text-decoration: none; color: #1f8ceb;}
 
 #error {color: #a94442; background-color: #f2dede; border-color: #ebccd1;}
 #success {color: #3c763d; background-color: #dff0d8; border-color: #d6e9c6;}
@@ -17,7 +17,8 @@ h1 {font-size: 24px;}
 
 .footer {text-align: center;font-size: smaller;}
 .footer a {text-decoration: none; outline:none; color: inherit;}
-a.feedback {font-weight: bold; color: #4A8EE2;}
+a.feedback {font-weight: bold; color: #1f8ceb;}
+a {color: #1f8ceb;}
 
 input#return_Custom {display: inline-block; width: 150px; padding: 2px 3px;}
 
