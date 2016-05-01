@@ -1,5 +1,5 @@
 # Intercom-Chrome-Extension
-A Google Chrome Extension for Intercom. Checks Intercom for emails found on the page and returns information and a link to the user.
+A Google Chrome Extension for Intercom. Checks Intercom for emails found on the page and returns information and a link to the user. Learn more [here](http://brianh2.github.io/Intercom-Chrome-Extension/).
 
 ### Table of Contents
 * [Installation](#installation)
